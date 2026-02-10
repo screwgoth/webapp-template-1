@@ -6,7 +6,7 @@ export interface AuthRequest extends Request {
   user?: JwtPayload;
 }
 
-export const authenticate = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const authenticate = (req: AuthRequest, _res: Response, next: NextFunction) => {
   try {
     const authHeader = req.headers.authorization;
 

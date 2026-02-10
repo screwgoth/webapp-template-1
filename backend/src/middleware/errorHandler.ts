@@ -27,18 +27,20 @@ export const errorHandler = (
   });
 
   if (err instanceof AppError) {
-    return res.status(err.statusCode).json({
+    res.status(err.statusCode).json({
       status: 'error',
       message: err.message,
     });
+    return;
   }
 
   if (err instanceof ZodError) {
-    return res.status(400).json({
+    res.status(400).json({
       status: 'error',
       message: 'Validation failed',
       errors: err.errors,
     });
+    return;
   }
 
   // Default error
