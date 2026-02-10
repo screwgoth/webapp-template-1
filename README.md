@@ -282,6 +282,72 @@ CORS_ORIGIN=http://localhost:5173
 VITE_API_URL=http://localhost:3000
 ```
 
+## 🧪 Testing
+
+This project includes comprehensive testing infrastructure across three layers:
+
+### Test Suites
+
+- **Backend Tests** - Jest + Supertest (80%+ coverage)
+- **Frontend Tests** - Vitest + React Testing Library (70%+ coverage)
+- **E2E Tests** - Playwright (Chromium, Firefox, WebKit)
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run specific test suites
+npm run test:backend      # Backend unit tests
+npm run test:frontend     # Frontend component tests
+npm run test:e2e          # E2E tests with Playwright
+
+# Watch mode (for development)
+npm run test:watch
+
+# Generate coverage reports
+npm run test:coverage
+
+# E2E tests with UI
+npm run test:e2e:ui
+```
+
+### Test Coverage
+
+**Backend:**
+- ✅ Auth endpoints (register, login, logout, refresh, password management)
+- ✅ User endpoints (GET/PUT/DELETE /api/users/me)
+- ✅ Health check endpoint
+- ✅ Protected route middleware
+- ✅ Validation middleware
+- ✅ Error handling
+- ✅ Password utilities
+- ✅ JWT utilities
+
+**Frontend:**
+- ✅ Auth pages (SignIn, SignUp, ForgotPassword)
+- ✅ Layout components (Header, Sidebar, Footer)
+- ✅ Dashboard page
+- ✅ Settings page (Profile, App Settings)
+- ✅ Protected route logic
+- ✅ Auth context
+- ✅ API client with interceptors
+
+**E2E:**
+- ✅ Complete user registration flow
+- ✅ Login flow (with remember me)
+- ✅ Password management flows
+- ✅ Dashboard navigation
+- ✅ Settings page interactions
+- ✅ Logout flow
+- ✅ Protected route redirects
+- ✅ Responsive layout (desktop + mobile)
+
+### Documentation
+
+For detailed testing documentation, see [TESTING.md](./TESTING.md)
+
 ## 🐳 Docker Commands
 
 ```bash
