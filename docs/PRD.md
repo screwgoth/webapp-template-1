@@ -1,9 +1,9 @@
 # Web Application Template - Product Requirements Document
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Date:** 2026-02-10  
 **Author:** ScrewMolt  
-**Status:** Draft  
+**Status:** Draft - Updated with UI/UX specifications  
 **Purpose:** Cookie-cutter template for future web applications
 
 ---
@@ -179,15 +179,47 @@ Starting new web projects involves repetitive boilerplate work:
   - Tailwind CSS for styling
   - shadcn/ui for components (optional but recommended)
   - Responsive design (mobile-first)
-- **Key Pages**
-  - Landing/Home page
-  - Login page
-  - Register page
-  - Forgot password page
-  - Dashboard (authenticated users)
-  - Profile page
-  - Admin panel (admin users only)
-  - 404 Not Found page
+
+- **Authentication Pages (Public)**
+  - **Sign Up Page**: Registration form with email, password, confirm password
+  - **Sign In Page**: Login form with email, password, "Remember me" checkbox
+  - **Forgot Password Page**: Email input to request password reset link
+
+- **Application Layout (Authenticated)**
+  - **Header** (Fixed top bar)
+    - Left: Application logo (clickable, links to Dashboard)
+    - Right: 
+      - Notification icon (bell icon, shows unread count badge)
+      - User icon/avatar (circular)
+        - Dropdown menu on click:
+          - Profile (navigates to Settings → Profile tab)
+          - Logout (logs out user, redirects to Sign In)
+  - **Left Sidebar** (Collapsible)
+    - Navigation menu items:
+      - Dashboard (home icon)
+      - Settings (gear icon)
+    - Responsive: Collapses to hamburger menu on mobile
+  - **Footer** (Fixed bottom bar)
+    - Left: "Made by screwgoth"
+    - Right: Version number (e.g., "v1.0.0")
+  - **Main Content Area**
+    - Between header and footer
+    - Scrollable content
+    - Responsive padding
+
+- **Key Pages (Authenticated)**
+  - **Dashboard**: 
+    - Home page after login
+    - Welcome message with user name
+    - Summary cards/widgets (customizable per project)
+  - **Settings**: 
+    - Tabbed interface with:
+      - **Profile Tab** (default): User profile management
+        - View/edit name, email, avatar
+        - Change password section
+        - Account information (created date, role)
+      - **App Settings Tab**: Application preferences (extensible)
+  - **404 Not Found Page**: User-friendly error page
 
 #### F6: Security
 - **Backend Security**
@@ -320,7 +352,151 @@ Starting new web projects involves repetitive boilerplate work:
 
 ---
 
-## 6. Technical Architecture
+## 6. UI/UX Specifications
+
+### 6.1 Layout Structure
+
+**Authenticated Application Layout:**
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Header                                                      │
+│  [Logo]                          [🔔 Notifications] [👤▾]    │
+│                                   └─ Dropdown:              │
+│                                      - Profile              │
+│                                      - Logout               │
+├──────────┬──────────────────────────────────────────────────┤
+│          │                                                   │
+│ Sidebar  │           Main Content Area                      │
+│          │                                                   │
+│ ☰ Menu   │  (Dashboard, Settings, or other pages)           │
+│          │                                                   │
+│ 🏠 Dash  │                                                   │
+│ ⚙️  Set  │                                                   │
+│          │                                                   │
+│          │                                                   │
+├──────────┴──────────────────────────────────────────────────┤
+│  Footer                                                      │
+│  Made by screwgoth                            v1.0.0        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 6.2 Component Details
+
+**Header Component:**
+- Height: 64px
+- Background: White/Light theme
+- Border bottom: 1px solid gray-200
+- Logo area (left):
+  - Width: ~200px
+  - Clickable, navigates to /dashboard
+  - Contains logo image + app name
+- Right section:
+  - Notification icon:
+    - Bell icon with badge (unread count)
+    - Dropdown list on click (future: shows notifications)
+  - User dropdown:
+    - User avatar (circular, 40px)
+    - User name next to avatar
+    - Chevron down icon
+    - Dropdown menu:
+      - Profile (with user icon)
+      - Logout (with logout icon)
+
+**Sidebar Component:**
+- Width: 240px (expanded), 64px (collapsed)
+- Background: Dark gray or accent color
+- Menu items:
+  - Dashboard (home icon + text)
+  - Settings (gear icon + text)
+- Hover effect on menu items
+- Active item highlighted
+- Collapsible toggle button at bottom
+- Mobile: Transforms to hamburger menu (overlay)
+
+**Footer Component:**
+- Height: 48px
+- Background: White/Light theme
+- Border top: 1px solid gray-200
+- Fixed at bottom
+- Flex layout:
+  - Left: "Made by screwgoth"
+  - Right: Version number (e.g., "v1.0.0")
+
+**Main Content Area:**
+- Background: Light gray (#f8f9fa)
+- Padding: 24px
+- Full height between header and footer
+- Scrollable if content overflows
+
+### 6.3 Page Specifications
+
+**Sign In Page:**
+- Centered card layout (max-width: 400px)
+- Fields:
+  - Email input (with validation)
+  - Password input (with show/hide toggle)
+  - Remember me checkbox
+  - Forgot password link
+- Sign In button (full width)
+- Link to Sign Up page at bottom
+
+**Sign Up Page:**
+- Centered card layout (max-width: 400px)
+- Fields:
+  - Name input
+  - Email input (with validation)
+  - Password input (with strength indicator)
+  - Confirm password input
+- Sign Up button (full width)
+- Link to Sign In page at bottom
+
+**Forgot Password Page:**
+- Centered card layout (max-width: 400px)
+- Email input field
+- Send Reset Link button
+- Back to Sign In link
+
+**Dashboard Page:**
+- Welcome header: "Welcome back, [User Name]!"
+- Grid of summary cards (customizable):
+  - Example: Total users, Recent activity, etc.
+- Cards with icons, titles, and values
+
+**Settings Page:**
+- Tabbed interface:
+  - **Profile Tab:**
+    - Avatar upload section (circular preview)
+    - Form fields:
+      - Name (editable)
+      - Email (read-only or editable with verification)
+      - Current password (for verification)
+      - New password
+      - Confirm new password
+    - Save Changes button
+  - **App Settings Tab:**
+    - Placeholder for future app-specific settings
+    - Example: Theme preference, language, etc.
+
+### 6.4 Color Scheme (Default)
+
+- **Primary**: Blue (#3b82f6)
+- **Secondary**: Gray (#6b7280)
+- **Success**: Green (#10b981)
+- **Danger**: Red (#ef4444)
+- **Warning**: Yellow (#f59e0b)
+- **Background**: Light gray (#f8f9fa)
+- **Text**: Dark gray (#1f2937)
+- **Border**: Light gray (#e5e7eb)
+
+### 6.5 Responsive Breakpoints
+
+- **Desktop**: ≥ 1024px (full sidebar)
+- **Tablet**: 768px - 1023px (collapsible sidebar)
+- **Mobile**: < 768px (hamburger menu overlay)
+
+---
+
+## 7. Technical Architecture
 
 ### 6.1 Tech Stack
 
