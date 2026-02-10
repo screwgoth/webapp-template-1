@@ -88,6 +88,8 @@ webapp-template/
 
 ## 🚀 Getting Started
 
+**⚡ Quick Start:** See [QUICKSTART.md](./QUICKSTART.md) for the fastest way to get running!
+
 ### Prerequisites
 
 - **Node.js 20+**
